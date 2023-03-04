@@ -5,7 +5,8 @@ export const useApiStore = defineStore('store',{
   state: ()=>({
     categories: [],
     products: [],
-
+    purchasedProducts: [],
+    amount: null
 
   }),
   actions:{
@@ -24,7 +25,21 @@ export const useApiStore = defineStore('store',{
       } catch (error) {
           console.log(error.message);
       }
+    },
+    addPurchasedProducts(el, increment){
+      this.purchasedProducts.push(el)
+      increment
+      console.log(this.purchasedProducts);
+    },
+    incrementAmount(item){
+      let narx= JSON.parse(item.narx)
+      this.amount += narx
     }
+
+
+  },
+  getters:{
+    
   }
 
 })

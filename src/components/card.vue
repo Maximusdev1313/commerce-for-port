@@ -14,7 +14,7 @@ let slide = ref(1)
 <template>
   <div class="container">
     <div class="wrapper row justify-around items-left wrap">
-      <div class="card shadow-up-5 q-ma-md column justify-center items-center" v-for="card in products" :key="card">
+      <div class="card shadow-up-5 q-ma-md column justify-center items-center" v-for="(card,index) in products" :key="index">
         <div
           class="discount "
           
@@ -26,17 +26,32 @@ let slide = ref(1)
           
         </div>
         <div class="card__img row justify-center">
-          
-              <img :src="card.rasmlari[0].link " :alt="card.rasmlari[0].title" >            
+          <router-link to="/">
+            <img :src="card.rasmlari[0].link " :alt="card.rasmlari[0].title" >            
+
+          </router-link>
           <!-- <div class="card__img_have-not"></div> -->
         </div>
-        <div class="card__title text-h6 text-weight-bold text-uppercase text-grey">Title</div>
+        <div class="card__title text-h6 text-weight-bold text-uppercase text-grey">{{ card.nomi }}</div>
         <div class="card__price row justify-between text-weight-bold">
-          <div class="card__price_old text-grey"> <del>{{ card.eski_narx }}</del> </div>
-          <div class="card__price_new text-red">{{card.narx}}</div>
+          <div class="card__price_old text-grey" > <del v-if="card.eski_narx">{{ card.eski_narx }} so'm</del> </div>
+          <div class="card__price_new text-red">{{card.narx}} so'm</div>
+        </div>
+        <div class="row justify-between">
+          <div>
+            Soni:
+          </div>
+          <div>
+            <button>bos</button>
+            <button>bos</button>
+          </div>
         </div>
         <div class="card__button ">
-            <q-btn class="full-width q-my-md" icon="shopping_cart" color="accent">
+            <q-btn
+              class="full-width q-my-md"
+              icon="shopping_cart"
+              color="accent"
+              @click="store.addPurchasedProducts(card, store.incrementAmount(card))">
                 <q-tooltip class="bg-accent">Buy</q-tooltip>
                 Buy now
             </q-btn>
@@ -75,3 +90,5 @@ img{
 }
 .card__button{
     width: 90%;
+}
+</style>

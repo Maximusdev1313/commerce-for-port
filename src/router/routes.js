@@ -5,7 +5,10 @@ export const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/categoriya/:id/', component: () => import('pages/ProductDetail.vue') }
+      { path: 'purchased', component: () => import('pages/PurchasedProducts.vue') },
+
+      { path: '/categoriya/:id/', component: () => import('pages/ProductDetail.vue') },
+
     ]
   },
 
